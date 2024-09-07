@@ -1,5 +1,5 @@
 import { EntityManager } from 'typeorm';
-import { TransactionResultManager } from '../decorators/transaction-result.manager';
+import { TransactionResultManager } from '../decorators';
 import { AsyncStorageFactory } from '../factories';
 
 export interface TransactionStorageItem {

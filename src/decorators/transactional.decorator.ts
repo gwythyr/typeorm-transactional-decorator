@@ -1,5 +1,5 @@
 import { TransactionResultManager } from './transaction-result.manager';
-import { dataSourceRef } from '../helpers/helpers';
+import { dataSourceRef } from '../helpers';
 import { TransactionManagerStorage } from '../storages';
 import { getEntityManager } from '../utils';
 import { EntityManager } from 'typeorm';

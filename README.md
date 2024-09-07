@@ -2,6 +2,9 @@
 
 A package to simplify transaction management in TypeORM.
 
+## Why one more package?
+I tried to find an package allowing to manage transactions with decorators and I didn't find any. This package is based on [typeorm-transactional](https://www.npmjs.com/package/typeorm-transactional) with some improvements and changes. Main change is that transaction is propagated to nested methods.
+
 ## Features
 
 - Easily manage database transactions with decorators
@@ -110,4 +113,4 @@ If you encounter any problems or have any questions, please open an issue on the
 
 ### Acknowledgements
 
-- [TypeORM](https://typeorm.io/) - The ORM that inspired this project
+- [typerom-transactional](https://www.npmjs.com/package/typeorm-transactional) - The package that inspired this project

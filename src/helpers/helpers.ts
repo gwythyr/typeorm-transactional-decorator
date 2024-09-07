@@ -1,6 +1,6 @@
 import { DataSource, EntityManager, QueryRunner, Repository } from 'typeorm';
 
-import { TypeOrmUpdatedPatchError } from '../errors/typeorm-updated-patch';
+import { TypeOrmUpdatedPatchError } from '../errors';
 import { getEntityManager, ignoreTransaction } from '../utils';
 
 const REPOSITORY_MANAGER_KEY = 'transaction-storage:original-manager';

@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EntityManager } from 'typeorm';
-import { TransactionResultManager } from '../decorators/transaction-result.manager';
+import { TransactionResultManager } from '../decorators';
 export interface TransactionStorageItem {
     entityManager?: EntityManager;
     transactionResultManager?: TransactionResultManager;
