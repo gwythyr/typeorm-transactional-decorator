@@ -1,0 +1,40 @@
+# Source files
+src/
+
+# TypeScript config
+tsconfig.json
+
+# Development configs
+.eslintrc.js
+.eslintignore
+
+# IDE settings
+.idea/
+.vscode/
+
+# Git files
+.git/
+.gitignore
+
+# Test files
+**/__tests__/
+**/*.spec.ts
+**/*.test.ts
+
+# Misc
+node_modules/
+npm-debug.log
+yarn-error.log
+.DS_Store
+
+# Build artifacts
+*.tsbuildinfo
+
+# Temporary files
+tmp/
+temp/
+
+# Documentation files (optional, remove if you want to include these)
+docs/
+*.md
+!README.md
