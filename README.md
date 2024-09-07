@@ -109,7 +109,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### Support
 
-If you encounter any problems or have any questions, please open an issue on the [GitHub repository](https://github.com/gwythyrv/typeorm-transactional-decorator/issues).
+If you encounter any problems or have any questions, please open an issue on the [GitHub repository](https://github.com/gwythyr/typeorm-transactional-decorator/issues).
 
 ### Acknowledgements
 

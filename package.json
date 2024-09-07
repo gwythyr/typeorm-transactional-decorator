@@ -1,6 +1,6 @@
 {
   "name": "typeorm-transactional-decorator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A package to simplify transaction management in TypeORM",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,12 +19,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gwythyrv/typeorm-transactional-decorator.git"
+    "url": "https://github.com/gwythyr/typeorm-transactional-decorator"
   },
   "bugs": {
-    "url": "https://github.com/gwythyrv/typeorm-transactional-decorator/issues"
+    "url": "https://github.com/gwythyr/typeorm-transactional-decorator/issues"
   },
-  "homepage": "https://github.com/gwythyrv/typeorm-transactional-decorator#readme",
+  "homepage": "https://github.com/gwythyr/typeorm-transactional-decorator#readme",
   "files": [
     "dist/**/*"
   ],

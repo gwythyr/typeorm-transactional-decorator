@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTransactionalDataSource = exports.dataSourceRef = void 0;
 const typeorm_1 = require("typeorm");
-const typeorm_updated_patch_1 = require("../errors/typeorm-updated-patch");
+const errors_1 = require("../errors");
 const utils_1 = require("../utils");
 const REPOSITORY_MANAGER_KEY = 'transaction-storage:original-manager';
 let wasRepositoryPatched = false;
@@ -66,7 +66,7 @@ const addTransactionalDataSource = (dataSource) => {
     // Patch DataSource.query
     const originalQuery = typeorm_1.DataSource.prototype.query;
     if (originalQuery.length !== 3) {
-        throw new typeorm_updated_patch_1.TypeOrmUpdatedPatchError();
+        throw new errors_1.TypeOrmUpdatedPatchError();
     }
     dataSource.query = function (...args) {
         var _a;
@@ -76,7 +76,7 @@ const addTransactionalDataSource = (dataSource) => {
     // Patch DataSource.createQueryBuilder
     const originalCreateQueryBuilder = typeorm_1.DataSource.prototype.createQueryBuilder;
     if (originalCreateQueryBuilder.length !== 3) {
-        throw new typeorm_updated_patch_1.TypeOrmUpdatedPatchError();
+        throw new errors_1.TypeOrmUpdatedPatchError();
     }
     dataSource.createQueryBuilder = function (...args) {
         var _a, _b;

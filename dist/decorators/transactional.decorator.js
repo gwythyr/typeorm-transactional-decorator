@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Transactional = void 0;
 const transaction_result_manager_1 = require("./transaction-result.manager");
-const helpers_1 = require("../helpers/helpers");
+const helpers_1 = require("../helpers");
 const storages_1 = require("../storages");
 const utils_1 = require("../utils");
 /**
