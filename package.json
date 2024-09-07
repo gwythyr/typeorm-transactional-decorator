@@ -1,6 +1,6 @@
 {
   "name": "typeorm-transactional-decorator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A package to simplify transaction management in TypeORM",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
