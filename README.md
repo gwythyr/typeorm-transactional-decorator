@@ -3,6 +3,7 @@
 A package to simplify transaction management in TypeORM.
 
 ## Why one more package?
+
 I tried to find an package allowing to manage transactions with decorators and I didn't find any. This package is based on [typeorm-transactional](https://www.npmjs.com/package/typeorm-transactional) with some improvements and changes. Main change is that transaction is propagated to nested methods.
 
 ## Features
@@ -31,8 +32,8 @@ npm install typeorm-transactional-decorator
    Import the package and configure it in your application.
 
    ```typescript
-   import { addTransactionalDataSource } from 'typeorm-transactional-decorator';
-   import { DataSource } from 'typeorm';
+   import { addTransactionalDataSource } from "typeorm-transactional-decorator";
+   import { DataSource } from "typeorm";
 
    // Initialize your DataSource
    const dataSource = new DataSource({
@@ -43,6 +44,37 @@ npm install typeorm-transactional-decorator
 
    // Add transactional capabilities to your DataSource
    addTransactionalDataSource(dataSource);
+   ```
+
+   **NestJS Configuration**:
+
+   If you're using NestJS, you can configure the package in your TypeORM module:
+
+   ```typescript
+   import { Module } from "@nestjs/common";
+   import { TypeOrmModule } from "@nestjs/typeorm";
+   import { DataSource, DataSourceOptions } from "typeorm";
+   import { addTransactionalDataSource } from "typeorm-transactional-decorator";
+
+   @Module({
+     imports: [
+       TypeOrmModule.forRootAsync({
+         useFactory: () => ({
+           // Your regular TypeORM configuration goes here
+           type: "postgres",
+           host: "localhost",
+           // ... other TypeORM options
+
+           // The important part for typeorm-transactional-decorator:
+           dataSourceFactory: (options: DataSourceOptions) => {
+             const dataSource = new DataSource(options);
+             return addTransactionalDataSource(dataSource);
+           },
+         }),
+       }),
+     ],
+   })
+   export class AppModule {}
    ```
 
 3. **Use Decorators**:
@@ -72,7 +104,10 @@ npm install typeorm-transactional-decorator
    Use `TransactionResultManager` to manage transaction outcomes.
 
    ```typescript
-   import { Transactional, getTransactionResultManager } from 'typeorm-transactional-decorator';
+   import {
+     Transactional,
+     getTransactionResultManager,
+   } from "typeorm-transactional-decorator";
 
    class FileService {
      @Transactional()
