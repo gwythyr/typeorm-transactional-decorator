@@ -64,13 +64,12 @@ npm install typeorm-transactional-decorator
            type: "postgres",
            host: "localhost",
            // ... other TypeORM options
-
-           // The important part for typeorm-transactional-decorator:
-           dataSourceFactory: (options: DataSourceOptions) => {
-             const dataSource = new DataSource(options);
-             return addTransactionalDataSource(dataSource);
-           },
          }),
+        // The important part for typeorm-transactional-decorator:
+        dataSourceFactory: (options: DataSourceOptions) => {
+          const dataSource = new DataSource(options);
+          return addTransactionalDataSource(dataSource);
+        },
        }),
      ],
    })
