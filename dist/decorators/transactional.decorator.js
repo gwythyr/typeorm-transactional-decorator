@@ -5,12 +5,12 @@ const transaction_result_manager_1 = require("./transaction-result.manager");
 const helpers_1 = require("../helpers");
 const storages_1 = require("../storages");
 const utils_1 = require("../utils");
-function Transactional() {
+function Transactional(options = {}) {
     return function (target, methodKey, descriptor) {
         const originalMethod = descriptor.value;
         descriptor.value = async function (...args) {
             const hasTransactionalContext = !!(0, utils_1.getEntityManager)();
-            if (!hasTransactionalContext) {
+            if (!hasTransactionalContext || options.forceNewTransaction) {
                 const transactionResultManager = new transaction_result_manager_1.TransactionResultManager();
                 try {
                     const result = await helpers_1.dataSourceRef.transaction(async (entityManager) => {
