@@ -15,6 +15,7 @@ import { EntityManager } from 'typeorm';
  * 1. Automatically manages transaction lifecycle (begin, commit, rollback).
  * 2. Supports nested transactions (only the outermost transaction is executed).
  * 3. Provides access to TransactionResultManager for handling commit/rollback events.
+ * 4. Supports forcing a new transaction with the forceNewTransaction parameter.
  * 
  * Usage:
  * ```typescript
@@ -32,7 +33,8 @@ import { EntityManager } from 'typeorm';
  *     return user;
  *   }
  * 
- *   @Transactional()
+ *   // Force a new transaction even if called from within another transaction
+ *   @Transactional({ forceNewTransaction: true })
  *   async transferFunds(fromUserId: number, toUserId: number, amount: number): Promise<void> {
  *     const fromUser = await this.userRepository.findOne(fromUserId);
  *     const toUser = await this.userRepository.findOne(toUserId);
@@ -56,16 +58,20 @@ import { EntityManager } from 'typeorm';
  * this decorator.
  */
 
+export interface TransactionalOptions {
+  forceNewTransaction?: boolean;
+}
+
 export function Transactional<
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   M extends (...args: unknown[]) => Promise<unknown>,
->(): MethodDecorator {
+>(options: TransactionalOptions = {}): MethodDecorator {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function <M>(target: unknown, methodKey: symbol | string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = async function (...args: unknown[]) {
       const hasTransactionalContext = !!getEntityManager();
-      if (!hasTransactionalContext) {
+      if (!hasTransactionalContext || options.forceNewTransaction) {
         const transactionResultManager = new TransactionResultManager();
         try {
           const result = await dataSourceRef.transaction(async (entityManager: EntityManager) => {
