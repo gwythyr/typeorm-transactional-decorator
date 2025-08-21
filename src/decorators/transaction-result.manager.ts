@@ -57,19 +57,23 @@ export class TransactionResultManager {
     this.emitter = new EventEmitter();
   }
 
-  onCommit(callback: () => Promise<void>): void {
+  onCommit(callback: () => Promise<void> | void): void {
     this.emitter.once(COMMIT_EVENT_NAME, async () => {
-      await callback().catch((error) => {
-        console.log(`onCommit error: ${error.message}`);
-      });
+      try {
+        await callback();
+      } catch (error: unknown) {
+        console.log(`onCommit error: ${error instanceof Error ? error.message : String(error)}`);
+      }
     });
   }
 
-  onRollback(callback: () => Promise<void>): void {
+  onRollback(callback: () => Promise<void> | void): void {
     this.emitter.once(ROLLBACK_EVENT_NAME, async () => {
-      await callback().catch((error) => {
-        console.log(`onRollback error: ${error.message}`);
-      });
+      try {
+        await callback();
+      } catch (error: unknown) {
+        console.log(`onCommit error: ${error instanceof Error ? error.message : String(error)}`);
+      }
     });
   }
 
