@@ -72,7 +72,7 @@ export class TransactionResultManager {
       try {
         await callback();
       } catch (error: unknown) {
-        console.log(`onCommit error: ${error instanceof Error ? error.message : String(error)}`);
+        console.log(`onRollback error: ${error instanceof Error ? error.message : String(error)}`);
       }
     });
   }

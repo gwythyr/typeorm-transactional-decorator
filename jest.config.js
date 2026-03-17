@@ -17,9 +17,9 @@ module.exports = {
 
   // Coverage
   collectCoverageFrom: [
-    "src/**/*.ts",
-    "!src/**/index.ts",
-    "!src/**/__mocks__/**",
+    'src/**/*.ts',
+    '!src/**/__mocks__/**',
+    '!src/**/index.ts',
   ],
   coverageDirectory: "coverage",
 

@@ -75,7 +75,7 @@ describe('@IgnoreTransaction decorator', () => {
       expect(capturedThis).toBe(context);
     });
 
-    it('this context is undefined when called without explicit context', async () => {
+    it('preserves an explicitly provided this context when called via .call()', async () => {
       let capturedThis: unknown = 'not-set';
 
       const wrapped = applyIgnoreTransaction(async function (this: unknown) {

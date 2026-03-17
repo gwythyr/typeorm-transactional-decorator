@@ -214,10 +214,7 @@ describe('TransactionResultManager', () => {
       await new Promise<void>((r) => setImmediate(r));
 
       expect(consoleSpy).toHaveBeenCalledTimes(1);
-      // NOTE: This asserts the ACTUAL (buggy) behavior — the source code logs
-      // 'onCommit error' even for rollback callbacks (copy-paste bug in
-      // transaction-result.manager.ts onRollback error handler).
-      expect(consoleSpy).toHaveBeenCalledWith('onCommit error: rollback sync error');
+      expect(consoleSpy).toHaveBeenCalledWith('onRollback error: rollback sync error');
     });
 
     it('catches and logs errors thrown by async rollback callbacks', async () => {
@@ -233,8 +230,7 @@ describe('TransactionResultManager', () => {
       await new Promise<void>((r) => setTimeout(r, 20));
 
       expect(consoleSpy).toHaveBeenCalledTimes(1);
-      // Same bug: rollback error handler uses 'onCommit error' prefix
-      expect(consoleSpy).toHaveBeenCalledWith('onCommit error: rollback async error');
+      expect(consoleSpy).toHaveBeenCalledWith('onRollback error: rollback async error');
     });
 
     it('does not propagate errors thrown in rollback callbacks to the caller', async () => {

@@ -76,6 +76,18 @@ class TransactionalTestService {
     return this.repo.save(user);
   }
 
+  /**
+   * Decorated with forceNewTransaction: true, saves a user then throws.
+   * Used to verify that the forceNewTransaction rollback path works correctly —
+   * the save must NOT be persisted after the error.
+   */
+  @Transactional({ forceNewTransaction: true })
+  async createUserForceNewAndThrow(name: string): Promise<never> {
+    const user = this.repo.create({ name });
+    await this.repo.save(user);
+    throw new Error('Intentional forceNewTransaction rollback');
+  }
+
   // ── test 6: TransactionResultManager callbacks ─────────────────────────────
 
   /**
@@ -264,7 +276,11 @@ describe('Transactional Integration', () => {
     it('rolls back if the forceNewTransaction method throws', async () => {
       // Verify that forceNewTransaction also rolls back on error — the decorator
       // logic (including the try/catch rollback path) runs regardless of the flag.
-      await expect(service.createUserAndThrow('ForceNewFail')).rejects.toThrow();
+      // Must use a method decorated with forceNewTransaction: true to exercise
+      // the correct code path.
+      await expect(service.createUserForceNewAndThrow('ForceNewFail')).rejects.toThrow(
+        'Intentional forceNewTransaction rollback'
+      );
 
       const found = await repo.findOne({ where: { name: 'ForceNewFail' } });
       expect(found).toBeNull();
