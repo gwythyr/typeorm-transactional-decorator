@@ -35,4 +35,38 @@ module.exports = {
 
   // Performance / reliability
   testTimeout: 10000,
+
+  projects: [
+    {
+      displayName: "unit-integration",
+      preset: "ts-jest",
+      testEnvironment: "node",
+      clearMocks: true,
+      resetMocks: true,
+      restoreMocks: true,
+      roots: ["<rootDir>/tests"],
+      testMatch: ["**/*.test.ts"],
+      testPathIgnorePatterns: ["/node_modules/", "/tests/e2e/"],
+      setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
+      transform: {
+        "^.+\\.ts$": ["ts-jest", { tsconfig: "tsconfig.test.json" }],
+      },
+      testTimeout: 10000,
+    },
+    {
+      displayName: "e2e",
+      preset: "ts-jest",
+      testEnvironment: "node",
+      clearMocks: true,
+      resetMocks: true,
+      restoreMocks: true,
+      roots: ["<rootDir>/tests/e2e"],
+      testMatch: ["**/*.test.ts"],
+      setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
+      transform: {
+        "^.+\\.ts$": ["ts-jest", { tsconfig: "tsconfig.test.json" }],
+      },
+      testTimeout: 60000,
+    },
+  ],
 };

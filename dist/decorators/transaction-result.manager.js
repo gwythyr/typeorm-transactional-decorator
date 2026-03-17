@@ -27,7 +27,7 @@ class TransactionResultManager {
                 await callback();
             }
             catch (error) {
-                console.log(`onCommit error: ${error instanceof Error ? error.message : String(error)}`);
+                console.log(`onRollback error: ${error instanceof Error ? error.message : String(error)}`);
             }
         });
     }
