@@ -100,7 +100,7 @@ describe('TransactionManagerStorage', () => {
     });
 
     it('supports an empty store object (all fields optional)', () => {
-      const result = TransactionManagerStorage.run(() => {
+      const result: TransactionStorageItem | undefined = TransactionManagerStorage.run(() => {
         return TransactionManagerStorage.get();
       }, {});
 

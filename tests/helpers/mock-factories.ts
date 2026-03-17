@@ -1,4 +1,4 @@
-import { DataSource, EntityManager, QueryRunner, Repository } from 'typeorm';
+import { DataSource, EntityManager, ObjectLiteral, QueryRunner, Repository } from 'typeorm';
 
 export function createMockQueryRunner(): jest.Mocked<Partial<QueryRunner>> {
   return {
@@ -43,7 +43,7 @@ export function createMockDataSource(): jest.Mocked<Partial<DataSource>> {
   };
 }
 
-export function createMockRepository<T>(): jest.Mocked<Partial<Repository<T>>> {
+export function createMockRepository<T extends ObjectLiteral>(): jest.Mocked<Partial<Repository<T>>> {
   return {
     find: jest.fn(),
     findOne: jest.fn(),
