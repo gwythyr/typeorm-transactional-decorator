@@ -2,13 +2,15 @@
   "compilerOptions": {
     "target": "ES2017",
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "removeComments": true
+    "removeComments": true,
+    "isolatedModules": true
   },
   "include": [
     "src/**/*"

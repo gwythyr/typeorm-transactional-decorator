@@ -48,3 +48,4 @@ temp/
 
 # Don't ignore dist/ for npm packages
 # dist/
+.dev/
