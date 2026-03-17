@@ -2,6 +2,12 @@ import { TransactionManagerStorage, TransactionStorageItem } from '../../src/sto
 import { TransactionResultManager } from '../../src/decorators/transaction-result.manager';
 import { EntityManager } from 'typeorm';
 
+// Helper: narrow the type of a `run()` return value so TypeScript doesn't infer
+// the result as `unknown` when the callback's return type is complex.
+function runAndCast<R>(cb: () => R, store: TransactionStorageItem): R {
+  return TransactionManagerStorage.run(cb, store) as R;
+}
+
 describe('TransactionManagerStorage', () => {
   describe('get()', () => {
     it('returns undefined outside of a run context', () => {
@@ -50,7 +56,7 @@ describe('TransactionManagerStorage', () => {
         transactionResultManager: trm,
       };
 
-      const result = TransactionManagerStorage.run(() => {
+      const result = runAndCast(() => {
         const s = TransactionManagerStorage.get();
         return { em: s?.entityManager, trm: s?.transactionResultManager };
       }, store);

@@ -5,13 +5,13 @@ import { addTransactionalDataSource } from '../../src/helpers/helpers';
 @Entity()
 export class TestUser {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column({ default: 0 })
-  balance: number;
+  balance!: number;
 }
 
 export async function createTestDataSource(): Promise<DataSource> {
